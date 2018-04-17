@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/header-color",
+  "_id": "@ionic-native/header-color@4.5.3",
+  "_inBundle": false,
+  "_integrity": "sha512-+E2KZYxEn3ClR6P2Frpf4Acrg2VDd8N4fkcruTOMsfhxAoXr9mL+6xZ1dJjETAR0DgWeUxAHpG0pv96qhsMRMw==",
+  "_location": "/@ionic-native/header-color",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/header-color",
+    "name": "@ionic-native/header-color",
+    "escapedName": "@ionic-native%2fheader-color",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/header-color/-/header-color-4.5.3.tgz",
+  "_shasum": "8367b29ba4a34c71103709e21ccbc5082060c32f",
+  "_spec": "@ionic-native/header-color",
+  "_where": "D:\\zunopos_1",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/header-color",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.5.3"
+}

@@ -1,0 +1,34 @@
+page-payment {
+  ion-input { 
+    border: 1px solid #488aff;
+    border-radius : 4px;
+    margin: 10px;
+  }
+
+  ion-select {
+    border: 1px solid #488aff;
+    border-radius : 4px;
+    margin: 10px;
+    width: 80%;
+    max-width: 80%;
+  }
+
+  .border-none {
+      border-bottom: none !important;
+  }
+
+
+  ion-label {
+    margin:0 !important;
+    color: #000 !important;
+  }
+
+  .input-wrapper {
+      padding-bottom: 0 !important;
+  }
+
+  .item-input ion-label {
+    color: #000 !important;
+  }
+
+}

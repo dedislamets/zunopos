@@ -1,0 +1,11 @@
+import { NgModule } from '@angular/core';
+import { Search } from './search/search';
+import { GroupbyPipe } from './groupby/groupby';
+@NgModule({
+	declarations: [Search,
+    GroupbyPipe],
+	imports: [],
+	exports: [Search,
+    GroupbyPipe]
+})
+export class PipesModule {}

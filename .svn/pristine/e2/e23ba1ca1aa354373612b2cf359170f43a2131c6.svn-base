@@ -1,0 +1,175 @@
+webpackJsonp([5],{
+
+/***/ 288:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductAllPageModule", function() { return ProductAllPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__product_all__ = __webpack_require__(297);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ProductAllPageModule = (function () {
+    function ProductAllPageModule() {
+    }
+    ProductAllPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__product_all__["a" /* ProductAllPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__product_all__["a" /* ProductAllPage */]),
+            ],
+        })
+    ], ProductAllPageModule);
+    return ProductAllPageModule;
+}());
+
+//# sourceMappingURL=product-all.module.js.map
+
+/***/ }),
+
+/***/ 297:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductAllPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_share_share__ = __webpack_require__(201);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProductAllPage = (function () {
+    function ProductAllPage(navCtrl, navParams, alertCtrl, app, httpClient, shareProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.app = app;
+        this.httpClient = httpClient;
+        this.shareProvider = shareProvider;
+        var param = {
+            type: 'Product'
+        };
+        /*this.httpClient.post('http://ums.inventory.id/api/v1/products?api_token=b3a18ce3-95d7-442e-9a7a-c062aabddcdf&select[0]=id&select[1]=updated_at&select[2]=deletable&select[3]=editable&select[4]=active&select[5]=cogs&select[6]=created_by__name&select[7]=created_by_id&select[8]=name&select[9]=number&select[10]=number2&select[11]=price_buy&select[12]=price_sell&select[13]=updated_by__name&select[14]=updated_by_id&select[15]=id&select[16]=unit_name&select[17]=unit_name2&select[18]=unit_name3&select[19]=unit_name4&select[20]=unit_name5&select[21]=unit_conversion&select[22]=unit_conversion2&select[23]=unit_conversion3&select[24]=unit_conversion4&select[25]=unit_conversion5&select[26]=max_quantity&select[27]=min_quantity&select[28]=max_quantity_unit_conversion&select[29]=min_quantity_unit_conversion&select[30]=active&filter[0][operator]=eq&filter[0][value]=1&filter[0][field]=category_id&filter[0][mode]=and&sorter[0][direction]=ASC&sorter[0][field]=name&limit=25&offset=0', param).subscribe(postData => {
+            this.products = postData['products'];
+
+            for (let product of this.products) {
+                product.price_sell = Math.round(parseFloat(product.price_sell) * 1000 / 1000);
+            }
+        });*/
+        this.productDummies = [{
+                name: 'Air Mineral',
+                price_sell: 5000
+            }, {
+                name: 'Bakso Ayam',
+                price_sell: 18000
+            }, {
+                name: 'Bakso Bom Beranak',
+                price_sell: 30000
+            }, {
+                name: 'Bakso Geprek',
+                price_sell: 15000
+            }, {
+                name: 'Gakso Granat',
+                price_sell: 18000
+            }, {
+                name: 'Bakso Iga',
+                price_sell: 35000
+            }, {
+                name: 'Bakso Keju',
+                price_sell: 22000
+            }, {
+                name: 'Bakso Mangkok',
+                price_sell: 25000
+            }, {
+                name: 'Bakso Pedas',
+                price_sell: 22000
+            }, {
+                name: 'Bakso Selimut Tetangga',
+                price_sell: 25000
+            }, {
+                name: 'Bakso Telur',
+                price_sell: 22000
+            }, {
+                name: 'Bakso Urat',
+                price_sell: 22000
+            }, {
+                name: 'Es Jeruk',
+                price_sell: 11000
+            }, {
+                name: 'Es Teh Manis',
+                price_sell: 5000
+            }, {
+                name: 'Es Teh Tawar',
+                price_sell: 3000
+            }, {
+                name: 'MociMoci Bubble Gum',
+                price_sell: 12000
+            }];
+        this.products = this.productDummies;
+        this.sale = this.shareProvider.getSale();
+        if (typeof this.sale == 'undefined') {
+            this.sale = {
+                amount: 0
+            };
+        }
+    }
+    ProductAllPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProductAllPage');
+    };
+    ProductAllPage.prototype.cancel = function () {
+        this.sale = {
+            amount: 0
+        };
+        this.shareProvider.setSale(this.sale);
+    };
+    ProductAllPage.prototype.checkout = function () {
+        this.app.getRootNav().push('PaymentPage');
+    };
+    ProductAllPage.prototype.select = function (product) {
+        if (typeof product.quantity == 'undefined') {
+            product.quantity = 0;
+        }
+        this.sale.amount += parseFloat(product.price_sell);
+        this.shareProvider.setSale(this.sale);
+    };
+    ProductAllPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
+            selector: 'page-product-all',template:/*ion-inline-start:"D:\zunopos_1\src\pages\product-all\product-all.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>Semua</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-footer>\n    <div style="padding: 2px 4px;">\n        <ion-row>\n            <ion-col col-4>\n                <button ion-button block outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em;" (tap)="cancel()">\n                    <div style="text-transform: capitalize;">Batal</div>\n                </button>\n            </ion-col>\n            \n            <ion-col col-8>\n                <button ion-button block strong color="zuno-button" style="font-size: 1.2em;" [disabled] = "sale.amount <= 0" (tap)="checkout()">\n                    <div style="text-transform: capitalize;">Bayar (Rp {{ sale.amount | number }})</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </div>\n</ion-footer>\n\n<ion-content>\n    <ion-searchbar\n        placeholder = "Cari"\n        [(ngModel)] = "search"\n        (ionCancel)="onCancel($event)"\n        (ionInput)="onInput($event)">\n    </ion-searchbar>\n\n    <ion-list>\n        <button ion-item *ngFor="let product of products" (tap)="select(product)">\n            <ion-thumbnail item-start>\n                <img src="http://placehold.it/80x80">\n            </ion-thumbnail>\n            <ion-row>\n                <ion-col style="white-space: normal;">\n                    {{ product.name }}<br /><br />\n                    Rp {{ product.price_sell | number }}\n                </ion-col>\n            </ion-row>\n        </button>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\zunopos_1\src\pages\product-all\product-all.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_share_share__["a" /* ShareProvider */]])
+    ], ProductAllPage);
+    return ProductAllPage;
+}());
+
+//# sourceMappingURL=product-all.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=5.js.map

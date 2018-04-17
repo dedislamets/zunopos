@@ -1,0 +1,12 @@
+page-invoice {
+	ion-label {
+		margin:0 !important;
+	}
+
+	.input-wrapper {
+	    padding-bottom: 0 !important;
+	}
+	.bold{
+		font-weight:bold;
+	}
+}

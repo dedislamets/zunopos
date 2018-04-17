@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
+
+@IonicPage()
+@Component({
+  selector: 'page-success',
+  templateUrl: 'success.html',
+})
+export class SuccessPage {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  		private viewCtrl: ViewController) {
+  		this.viewCtrl.showBackButton(false);
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad SuccessPage');
+  }
+
+  	backRoot() {
+		this.navCtrl.setRoot(HomePage);
+	}
+
+}

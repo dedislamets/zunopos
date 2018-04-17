@@ -1,0 +1,38 @@
+import { Component, ViewChild } from '@angular/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+
+import { Nav, Platform } from 'ionic-angular';
+
+import { HomePage } from '../pages/home/home';
+
+@Component({
+    templateUrl: 'app.html'
+})
+export class MyApp {
+    @ViewChild(Nav) nav: Nav;
+
+    rootPage: any = 'LoginPage';
+
+    pages: Array<{title: string, component: any}>;
+
+    constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar) {
+        platform.ready().then(() => {
+            splashScreen.hide();
+            statusBar.backgroundColorByHexString('#ffa530');
+            statusBar.styleLightContent();
+        });
+
+        this.pages = [            
+            { component: HomePage, title: 'Pesanan' },
+            { component: 'SalePage', title: 'Histori Penjualan' },
+            { component: 'SettingPage', title: 'Pengaturan' },
+            { component: 'UserPage', title: 'Ganti Kasir' },
+            { component: 'ExitPage', title: 'Keluar' }
+        ];
+    }
+
+    openPage(page) {
+        this.nav.setRoot(page.component);
+    }
+}

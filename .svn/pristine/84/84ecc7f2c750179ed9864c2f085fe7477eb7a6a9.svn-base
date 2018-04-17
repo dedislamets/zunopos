@@ -1,0 +1,35 @@
+page-payment {
+  ion-input { 
+    border: 1px solid #488aff;
+    border-radius : 4px;
+  }
+
+  .item-padding {
+      padding: 10px;
+  }
+
+  .border-none {
+      border-bottom: none !important;
+  }
+
+  .inv {
+    width: 63%;
+    margin: 0 !important;
+    height: 41px !important;
+    
+  }
+
+  .input-wrapper {
+      padding-bottom: 10px;
+  }
+}
+
+
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222
+);

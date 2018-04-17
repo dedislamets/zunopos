@@ -1,0 +1,13 @@
+page-product-all {
+  ion-avatar {
+    max-height: 64px !important;
+    max-width: 64px !important;
+    height : 100% !important;
+    width:100% !important;
+  }
+
+  ion-avatar img {
+    height : 100% !important;
+    width:100% !important;
+  }
+}

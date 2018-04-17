@@ -1,0 +1,116 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-title>Detil Rekap Kas</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-footer>
+    <div class="footer-wrapper">
+        <button ion-button strong color="zuno" block (tap)="printCashRegister()">Cetak Struk</button>
+    </div>
+</ion-footer>
+
+<ion-content padding>
+    <div class="cash-register-detail-header with-padding">
+        <h1 class="title">{{ userShift.user__name }}</h1>
+        <span class="sub-title">{{ userShift.sign_in_date_format }}  - {{ userShift.sign_out_date_format }}</span>
+    </div><!-- /.cash-register-detail-header -->
+
+    <div class="cash-register-complete">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-8>
+                    <strong>Penjualan</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ salesAmount | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+
+            <!--
+            <ion-row>
+                <ion-col col-8>
+                    Void
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    {{ salesAmount | currency: 'IDR' }}
+                </ion-col>
+            </ion-row>
+            -->
+
+            <ion-row>
+                <ion-col col-8>
+                    <strong>Kas Masuk</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ transactionsAmountIn | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-8>
+                    <strong>Kas Keluar</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ transactionsAmountOut | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+
+            <div class="spacer"></div>
+
+            <ion-row>
+                <ion-col col-8>
+                    <strong>Penerimaan Sistem</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ userShift.sign_out_amount | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row class="has-child">
+                <ion-col col-8>
+                    <strong>Penerimaan Aktual</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ userShift.sign_out_amount_actual | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row class="label">
+                <ion-col col-8>
+                    <span class="sub-label">Tunai</span>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    {{ userShift.sign_out_amount_actual_cash | currency: 'IDR' }}
+                </ion-col>
+            </ion-row>
+            <ion-row class="label">
+                <ion-col col-8>
+                    <span class="sub-label">Kartu</span>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    {{ userShift.sign_out_amount_actual_card | currency: 'IDR' }}
+                </ion-col>
+            </ion-row>
+            <ion-row class="has-child">
+                <ion-col col-8>
+                    <strong>Selisih</strong>
+                </ion-col>
+
+                <ion-col col-4 class="align-right">
+                    <strong>{{ amountDeviation | currency: 'IDR' }}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row class="label">
+                <ion-col col-12>
+                    <span class="sub-label">(Penerimaan aktual - penerimaan sistem)</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div><!-- /.cash-register-detail-list -->
+</ion-content>

@@ -1,0 +1,156 @@
+webpackJsonp([6],{
+
+/***/ 286:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PinPageModule", function() { return PinPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pin__ = __webpack_require__(295);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var PinPageModule = (function () {
+    function PinPageModule() {
+    }
+    PinPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__pin__["a" /* PinPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__pin__["a" /* PinPage */]),
+            ],
+        })
+    ], PinPageModule);
+    return PinPageModule;
+}());
+
+//# sourceMappingURL=pin.module.js.map
+
+/***/ }),
+
+/***/ 295:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PinPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_home_home__ = __webpack_require__(102);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var PinPage = (function () {
+    function PinPage(navCtrl, navParams, storage, toastCtrl) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.storage = storage;
+        this.toastCtrl = toastCtrl;
+        this.circle1 = 'circle';
+        this.circle2 = 'circle';
+        this.circle3 = 'circle';
+        this.circle4 = 'circle';
+        this.pin = '';
+        storage.get('login').then(function (getData) {
+            if (getData) {
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_home_home__["a" /* HomePage */]);
+            }
+        });
+    }
+    PinPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad PinPage');
+    };
+    PinPage.prototype.tapBackspace = function () {
+        if (this.circle4 == 'circle-solid') {
+            this.circle4 = 'circle';
+            this.pin = this.pin.substring(0, this.pin.length - 1);
+        }
+        else if (this.circle3 == 'circle-solid') {
+            this.circle3 = 'circle';
+            this.pin = this.pin.substring(0, this.pin.length - 1);
+        }
+        else if (this.circle2 == 'circle-solid') {
+            this.circle2 = 'circle';
+            this.pin = this.pin.substring(0, this.pin.length - 1);
+        }
+        else {
+            this.circle1 = 'circle';
+            this.pin = this.pin.substring(0, this.pin.length - 1);
+        }
+    };
+    PinPage.prototype.tapClear = function () {
+        this.circle1 = 'circle';
+        this.circle2 = 'circle';
+        this.circle3 = 'circle';
+        this.circle4 = 'circle';
+        this.pin = '';
+    };
+    PinPage.prototype.tapNumber = function (number) {
+        if (this.circle1 == 'circle') {
+            this.circle1 = 'circle-solid';
+            this.pin += number;
+        }
+        else if (this.circle2 == 'circle') {
+            this.circle2 = 'circle-solid';
+            this.pin += number;
+        }
+        else if (this.circle3 == 'circle') {
+            this.circle3 = 'circle-solid';
+            this.pin += number;
+        }
+        else {
+            this.circle4 = 'circle-solid';
+            this.pin += number;
+            if (this.pin == '0411') {
+                this.storage.set('login', 'Login Berhasil');
+                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_home_home__["a" /* HomePage */]);
+            }
+            else {
+                this.tapClear();
+                this.toastCtrl.create({
+                    closeButtonText: 'OK',
+                    duration: 1000,
+                    message: 'PIN salah. Harap coba lagi.',
+                    showCloseButton: true
+                }).present();
+            }
+        }
+    };
+    PinPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-pin',template:/*ion-inline-start:"D:\zunopos_1\src\pages\pin\pin.html"*/'<ion-footer>\n    <table>\n        <tr>\n            <td style="width: 33%;">\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(1)">\n                    <div style="text-transform: capitalize;">1</div>\n                </button>\n            </td>\n\n            <td style="width: 34%;">\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(2)">\n                    <div style="text-transform: capitalize;">2</div>\n                </button>\n            </td>\n\n            <td style="width: 33%;">\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(3)">\n                    <div style="text-transform: capitalize;">3</div>\n                </button>\n            </td>\n        </tr>\n\n        <tr>\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(4)">\n                    <div style="text-transform: capitalize;">4</div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(5)">\n                    <div style="text-transform: capitalize;">5</div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(6)">\n                    <div style="text-transform: capitalize;">6</div>\n                </button>\n            </td>\n        </tr>\n\n        <tr>\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(7)">\n                    <div style="text-transform: capitalize;">7</div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(8)">\n                    <div style="text-transform: capitalize;">8</div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(9)">\n                    <div style="text-transform: capitalize;">9</div>\n                </button>\n            </td>\n        </tr>\n\n        <tr>\n            <td>\n                <button ion-button clear full large style="color: #666; height: 48px !important; margin: 0 !important;" (tap)="tapClear()">\n                    <div style="text-transform: capitalize;"><ion-icon name="close"></ion-icon></div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(0)">\n                    <div style="text-transform: capitalize;">0</div>\n                </button>\n            </td>\n\n            <td>\n                <button ion-button clear full large style="color: #666; height: 48px !important; margin: 0 !important;" (tap)="tapBackspace()">\n                    <div style="text-transform: capitalize;"><ion-icon name="backspace"></ion-icon></div>\n                </button>\n            </td>\n        </tr>\n    </table>\n</ion-footer>\n\n<ion-content>\n    <ion-grid no-padding class="pin">\n        <ion-row>\n            <ion-col text-center>\n                <img height="60" src="assets/imgs/zuno-logo.png" width="60" /><br />\n                <span style="color: #666; font-size: 1.6em; font-weight: bold; text-align: center;">ZUNOPOS</span><br /><br />\n                <p style="color: #666; font-size: 1.1em; text-align: center;">Enter PIN</p>\n            </ion-col>\n        </ion-row>\n\n        <ion-row style="color: #666; margin: 0.5em 0 1em; width: 100%">\n            <ion-col col-4>\n            </ion-col>\n\n            <ion-col col-1>\n                <div [class]="circle1" style="margin: 0 auto;"></div>\n            </ion-col>\n\n            <ion-col col-1 text-center>\n                <div [class]="circle2" style="margin: 0 auto;"></div>\n            </ion-col>\n\n            <ion-col col-1 text-center>\n                <div [class]="circle3" style="margin: 0 auto;"></div>\n            </ion-col>\n\n            <ion-col col-1 text-center>\n                <div [class]="circle4" style="margin: 0 auto;"></div>\n            </ion-col>\n\n            <ion-col col-4>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>\n'/*ion-inline-end:"D:\zunopos_1\src\pages\pin\pin.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
+    ], PinPage);
+    return PinPage;
+}());
+
+//# sourceMappingURL=pin.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=6.js.map

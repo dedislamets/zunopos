@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-buttons start>
+	        <button ion-button menuToggle>
+	          <ion-icon name="menu"></ion-icon>
+	        </button>
+	    </ion-buttons>      
+	    <ion-title *ngFor="let headers of header">Rp. {{ headers.amount | number }}</ion-title>	    
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-list>
+		<ion-item-group *ngFor="let headers of header">
+		    <ion-item-divider color="light">Details</ion-item-divider>
+		    <ion-item>
+		    	<ion-col col-12>
+					<ion-icon name="card" item-start></ion-icon> Cash
+				</ion-col>		
+		    </ion-item>
+		    <ion-item>
+				<ion-col col-12>
+					<ion-icon name="list-box" item-start></ion-icon> Receipt Number {{ headers.number }}
+				</ion-col>
+			</ion-item>
+		    <ion-item>
+		    	<ion-col col-12>
+					<ion-icon name="stopwatch" item-start></ion-icon> {{ headers.date }}
+				</ion-col>
+		    </ion-item>
+		</ion-item-group>
+
+		<ion-item-group>
+		    <ion-item-divider color="light">Items</ion-item-divider>
+		    <ion-item *ngFor="let item of headerItems">
+		    	<ion-col col-6>
+					- {{ item.product__name }}
+				</ion-col>
+				<ion-col col-2>
+					{{ item.quantity }}x
+				</ion-col>
+				<ion-col col-4 item-end>
+					Rp {{ item.price | number }}
+				</ion-col>
+		    </ion-item>
+		    <ion-item  *ngFor="let headers of header">
+		    	<ion-col col-8>
+					Subtotal
+				</ion-col>
+				<ion-col col-4 item-end>
+					Rp {{ headers.amount_subtotal | number }}
+				</ion-col>
+		    </ion-item>
+		</ion-item-group>
+	</ion-list>
+</ion-content>
+
+<ion-footer>
+    <div style="padding: 2px 4px;">
+        <ion-row>
+            <ion-col col-12>
+                <button ion-button block strong color="zuno-button" style="font-size: 1.2em;" (click)="SendReceipt()">
+                    <div style="text-transform: capitalize;">Print Receipt</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-footer>

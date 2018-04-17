@@ -1,0 +1,11 @@
+page-cash-register-recap {
+    .recap-form {
+        ion-item {
+            padding-left: 0;
+        }
+    }
+
+    .footer-wrapper {
+        padding: 5px 10px;
+    }
+}

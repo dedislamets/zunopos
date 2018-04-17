@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ShareProvider {
+    private sale: any;
+    private saleItem: any;
+
+    constructor(public http: HttpClient) {
+        console.log('Hello ShareProvider Provider');
+    }
+
+    getSale() {
+        return this.sale;
+    }
+
+    getSaleItem() {
+        return this.saleItem;
+    }
+
+    setSale(updatedSale) {
+        this.sale = updatedSale;
+    }
+
+    setSaleItem(updatedSaleItem) {
+        this.saleItem = updatedSaleItem;
+    }
+}

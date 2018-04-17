@@ -1,0 +1,85 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@import "../../node_modules/compass-sass-mixins/lib/compass";
+
+.clearfix {
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.list-label {
+        font-size: 12px;
+        color: grey;
+        margin-bottom: 5px;
+    }
+
+.list-value {
+    font-size: 16px;
+}
+
+.align-right {
+    text-align: right;
+
+    input {
+        text-align: right;
+    }
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.cash-register-detail-header {
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .title {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+
+    .sub-title {
+        font-size: 11px;
+        color: grey;
+    }
+
+    &.with-padding {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

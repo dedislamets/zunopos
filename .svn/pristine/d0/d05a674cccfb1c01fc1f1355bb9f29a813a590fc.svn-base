@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+import { AlertController, NavController } from 'ionic-angular';
+
+import { PrintProvider } from '../../providers/print/print';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'home.html'
+})
+export class HomePage {
+    private tab1Root: string = 'ProductAllPage';
+    private tab2Root: string = 'ProductFoodPage';
+    private tab3Root: string = 'ProductDrinkPage';
+    private tab4Root: string = 'ProductOtherPage';
+
+    constructor(public navCtrl: NavController,
+        private alertCtrl: AlertController,
+        private printProvider: PrintProvider) {
+    }
+}

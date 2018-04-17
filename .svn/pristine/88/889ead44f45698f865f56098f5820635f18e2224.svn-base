@@ -1,0 +1,33 @@
+import { AlertController, NavController, ModalController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { ModalPage } from '../../pages/modal/modal';
+import { PrintProvider } from '../../providers/print/print';
+import { ShareProvider } from '../../providers/share/share';
+import { Storage } from '@ionic/storage';
+
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'home.html'
+})
+export class HomePage {
+    private tab1Root: string = 'ProductAllPage';
+    private tab2Root: string = 'ProductFoodPage';
+    private tab3Root: string = 'ProductDrinkPage';
+    private tab4Root: string = 'ProductOtherPage';
+    private character: any;
+
+    constructor(
+        public navCtrl: NavController,
+        public modalCtrl: ModalController,
+        public navParams: NavParams,
+        private alertCtrl: AlertController,
+        private printProvider: PrintProvider,
+        private shareProvider: ShareProvider,
+        private storage: Storage) {
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad UserPage');
+    }
+}

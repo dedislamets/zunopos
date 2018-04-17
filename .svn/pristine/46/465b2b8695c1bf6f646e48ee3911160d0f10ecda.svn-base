@@ -1,0 +1,154 @@
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { App, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { ShareProvider } from '../../providers/share/share';
+
+@IonicPage()
+@Component({
+  selector: 'page-history',
+  templateUrl: 'history.html',
+})
+export class HistoryPage {
+	
+	salesDummies = [];
+	filteredJson = [];
+	salesFilter = [];
+	arrays = [];
+	private itemSale: any;
+	isfiltered: boolean ;
+
+  	constructor(public navCtrl: NavController, public navParams: NavParams,
+        private httpClient: HttpClient,
+        private app: App,
+        private shareProvider: ShareProvider,
+        private storage: Storage,
+        public loadingCtrl: LoadingController) {
+        	this.itemSale = this.shareProvider.getSaleItem();
+
+            let loader = this.loadingCtrl.create();
+            loader.present();
+            this.initializeItemsInvoice();    
+            loader.dismiss();    
+        	
+  	}
+
+   	ionViewDidLoad() {
+        this.initializeItemsInvoice();        
+    }
+
+    initializeItemsInvoice() {
+    	var groupArray = require('group-array');
+    	var dateFormat = require('dateformat');
+    	var filtered = [];
+    	
+        this.storage.get('user_api').then(userApi => {
+            let sort = [];
+            sort.push({
+                property: 'date',
+                direction: 'DESC'
+            });
+
+            sort.push({
+                property: 'number_link',
+                direction: 'DESC'
+            });
+
+            sort.push({
+                property: 'id',
+                direction: 'DESC'
+            });
+
+            var param = {
+                page: 1,
+                start: 0,
+                limit: 25,
+                api_token: userApi.apiToken,
+                sort: JSON.stringify(sort)
+            };
+
+            let sales = [];
+
+            this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sales', param).subscribe(data => {
+                this.arrays = groupArray(data['sales'], 'date');
+                for(var key in this.arrays) {
+                	filtered.push({
+				        tanggal: dateFormat(key, "dd/mm/yyyy"),
+				        item: this.arrays[key]
+				    });
+				}
+
+				this.salesDummies = filtered;
+				
+            });
+        });
+       
+        this.isfiltered = false;
+    }
+
+    onInputInvoice(ev) {
+        this.initializeItemsInvoice();
+        var val = ev.target.value;
+        var filtered = [];
+        var groupArray = require('group-array');
+	    var dateFormat = require('dateformat');
+ 
+        this.storage.get('user_api').then(userApi => {
+        	let filter = [];
+            var param;
+            if(val && val.trim() != '') {
+	        	this.isfiltered = true;
+	        	filter.push({
+	                field: 'number',
+	                operator: 'like',
+	                value: val,
+	                mode: 'and'
+	            });
+	            param = {
+	                page: 1,
+	                start: 0,
+	                limit: 25,
+	                api_token: userApi.apiToken,
+	               	filter: JSON.stringify(filter)
+            	};
+	        }else {
+	        	param = {
+	                page: 1,
+	                start: 0,
+	                limit: 25,
+	                api_token: userApi.apiToken,
+            	};
+	        }
+
+            this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sales', param).subscribe(data => {
+                this.salesDummies = groupArray(data['sales'], 'date');
+                for(var key in this.salesDummies) {
+                	filtered.push({
+				        tanggal: dateFormat(key, "dd/mm/yyyy"),
+				        item: this.salesDummies[key]
+				    });
+				}
+
+				this.filteredJson = filtered;
+				this.salesDummies = filtered;
+
+            });
+        });        
+    }
+
+    select(item) {
+        console.log(item);
+    	this.navCtrl.push('InvoicePage', {
+          id: item.id,
+        })
+    }
+
+    onCancelInvoice(ev) {
+        this.initializeItemsInvoice();
+    }
+
+    clearSearchInvoice(ev) {
+        this.initializeItemsInvoice();
+    }
+
+}

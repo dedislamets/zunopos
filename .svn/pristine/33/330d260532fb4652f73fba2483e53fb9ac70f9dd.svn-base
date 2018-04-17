@@ -1,0 +1,37 @@
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
+
+@Injectable()
+export class PrintProvider {
+
+  constructor(private alertCtrl:AlertController, private bluetoothSerial:BluetoothSerial) {
+  }
+
+  print(text) {
+    this.bluetoothSerial.list().then(listData => {
+      let connect = this.bluetoothSerial.connect(listData[0].id).subscribe(connectData => {
+        this.bluetoothSerial.write(text+"\n\n\n").then(writeData => {
+          connect.unsubscribe();
+      }, connectError => {
+        this.alertCtrl.create({
+          buttons: [
+            'OK'
+          ],
+          message: connectError,
+          title: 'Error',
+        }).present();
+      });
+    }, listError => {
+        this.alertCtrl.create({
+          buttons: [
+            'OK'
+          ],
+          message: listError,
+          title: 'Error',
+        }).present();
+      });
+    });
+  }
+}

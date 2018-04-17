@@ -1,0 +1,17 @@
+page-cash-register {
+    .item-block {
+        padding-left: 0;
+    }
+
+    .label-md {
+        margin: 8px 0 5px;
+    }
+
+    .button-icon {
+        margin-top: 10px;
+    }
+
+    ion-list {
+        border-bottom: 1px solid #dedede;
+    }
+}

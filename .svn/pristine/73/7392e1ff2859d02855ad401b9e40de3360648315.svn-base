@@ -1,0 +1,107 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { App, IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import { ShareProvider } from '../../providers/share/share';
+import { SuccessPage } from '../../pages/success/success';
+import { Storage } from '@ionic/storage';
+import { ToastController } from 'ionic-angular';
+
+@IonicPage()
+@Component({
+  selector: 'page-payment',
+  templateUrl: 'payment.html',
+})
+export class PaymentPage {
+    private sale: any;
+    public ionicNamedColor: string = 'primary';
+
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        private shareProvider: ShareProvider,
+        private httpClient: HttpClient,
+        private app: App,
+        private storage: Storage,
+        public toastCtrl: ToastController) {
+          this.amount = this.shareProvider.getSale().amount;
+          console.log(this.shareProvider.getSale());
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad PaymentPage');
+    }
+
+    payment() {
+        let sale_item = [];
+
+        this.amount = this.shareProvider.getSale().amount;
+        this.storage.get('sale').then(sale => {
+            for (let item of sale) {
+                sale_item.push({
+                    id:0,
+                    product_id: item.id,
+                    name: item.name,
+                    quantity: 1,
+                    unit_name:"PCS",
+                    unit_conversion:1,
+                    discount:"",
+                    price: item.price,
+                    price_gross: item.price,
+                    price_discount:0,
+                    price_subtotal: item.price,
+                    amount: item.price,
+                    amount_gross: item.price,
+                    amount_discount:0,
+                    amount_subtotal: item.price,
+                    sort:0
+                });
+            }   
+
+            
+            let param = {
+                api_token: '4915736d-6124-4da1-86f6-23b64f3198fe',
+                sale_consignment_id: 0,
+                sale_order_id: 0,
+                sale_quotation_id: 0,
+                ppn: 0,
+                amount_gross: this.amount,
+                number: '',
+                date: '2018-03-27 00:00:00',
+                customer_id: 14,
+                payment_term_id: 1,
+                due_days: 0,
+                due_date: '2018-03-27 00:00:00',
+                location_id: 1,
+                nofa_number: '',
+                salesperson_id: 13,
+                date_begin: '',
+                date_end: '',
+                description: 'From Zunopos',
+                note: 'From Zunopos',
+                amount_subtotal: this.amount,
+                discount: '',
+                amount_discount: 0,
+                amount_rounding: 0,
+                amount_taxable: this.amount,
+                ppn_percentage: 0,
+                ppn_amount: 0,
+                amount: this.amount,
+                sale_items: sale_item
+            };  
+            console.log(param);
+            this.storage.get('user_api').then(userApi => {
+                this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sale', param).subscribe(data => {
+                    console.log(data);
+                    if(data.success) {
+                        this.navCtrl.setRoot(SuccessPage);
+                    }else{
+                        let toast = this.toastCtrl.create({
+                          message: data.message,
+                          duration: 3000
+                        });
+                        toast.present();
+                    }
+
+                });
+            });
+        });           
+    }
+}

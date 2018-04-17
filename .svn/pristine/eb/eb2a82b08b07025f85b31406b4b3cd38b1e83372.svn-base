@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-buttons start>
+	        <button ion-button menuToggle>
+	          <ion-icon name="menu"></ion-icon>
+	        </button>
+	    </ion-buttons>      
+	    <ion-title>Pembayaran</ion-title>
+	    <ion-buttons end>
+	        <button ion-button (click)="payment()">
+	          	Charge 
+	      	</button>
+	    </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div padding>
+	  <button ion-button block>Rp {{ amount | number }}</button>
+	</div>
+
+	<ion-list>
+
+		<ion-item class="item-padding" style="padding-top: 0">
+		    <ion-label fixed>Cash</ion-label>
+		    <ion-input type="text" placeholder="Rp {{ amount | number }}"></ion-input>
+		</ion-item>
+
+		<ion-item class="item-padding" style="padding-top: 0">
+		    <ion-label fixed>Other</ion-label>
+		    <button ion-button outline class="inv" item-end>EDC</button>
+		 </ion-item>
+		 <ion-item class="item-padding" style="padding-top: 0;">
+		    <ion-label fixed></ion-label>
+		    <button ion-button outline class="inv" item-end>Other</button>
+		 </ion-item>
+		 <ion-item class="item-padding" style="padding-top: 0">
+		    <ion-label fixed></ion-label>
+		    <ion-input type="text" placeholder="Optional Note"></ion-input>
+		</ion-item>
+
+		<ion-item class="item-padding" style="padding-top: 0">
+		    <ion-label fixed>Invoice</ion-label>
+		    <button ion-button outline class="inv" [color]="ionicNamedColor" (click)="toggleNamedColor()" item-end>
+		    	<ion-row>
+	                <ion-col width-90>
+	                	<ion-icon name="paper"></ion-icon>
+	                    Invoice
+	                </ion-col>
+	                <ion-col width-10>
+	                    <ion-icon name="arrow-forward"></ion-icon>
+	                </ion-col>
+	            </ion-row>
+		    </button>
+		 </ion-item>
+	</ion-list>
+</ion-content>

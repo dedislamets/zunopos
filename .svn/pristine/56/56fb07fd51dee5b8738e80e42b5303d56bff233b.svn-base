@@ -1,0 +1,113 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { PrintProvider } from '../../providers/print/print';
+
+@IonicPage()
+@Component({
+  selector: 'page-invoice',
+  templateUrl: 'invoice.html',
+})
+export class InvoicePage {
+	public idParam;
+	header = [];
+	headerItems = [];
+
+  	constructor(public navCtrl: NavController, public navParams: NavParams,
+        private httpClient: HttpClient,
+        private printProvider: PrintProvider,
+        private storage: Storage,
+        public loadingCtrl: LoadingController) {
+
+        	this.idParam = navParams.get("id");
+
+            let loader = this.loadingCtrl.create();
+            loader.present();
+            this.initializeItemsInvoice();    
+            loader.dismiss();    
+    }
+
+
+  	ionViewDidLoad() {
+    	this.initializeItemsInvoice(); 
+  	}
+
+  	initializeItemsInvoice() {
+        this.storage.get('user_api').then(userApi => {
+            let filter = [];
+            filter.push({
+                field: 'id',
+                operator: 'eq',
+                value: this.idParam,
+                mode: 'and'
+            });
+
+            var param = {
+                api_token: userApi.apiToken,
+                filter: JSON.stringify(filter)
+            };
+
+            this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sales', param).subscribe(data => {
+                this.header = data['sales'];				
+            });
+
+            filter = [];
+            filter.push({
+                field: 'sale_id',
+                operator: 'eq',
+                value: this.idParam,
+                mode: 'and'
+            });
+
+            var param_items = {
+                api_token: userApi.apiToken,
+                select: 'id,product_id,product__name,quantity,price,price_subtotal',
+                filter: JSON.stringify(filter)
+            };
+
+            this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sale_items', param_items).subscribe(data_items => {
+            	console.log(data_items);
+                this.headerItems = data_items['saleItems'];
+            });
+
+        });
+    }
+
+    SendReceipt() {
+
+        var text: string;
+        var number_bill: string;
+        var date_bill: string;
+        var subtotal: any;
+        var note: string;
+
+        for (let head of this.header) {
+           number_bill = head.number;
+           date_bill = head.date;
+           subtotal = head.amount_subtotal;
+           note = head.note;
+        }
+
+        text = '       RECEIPT NUMBER        \n';
+        text += '----------------------------\n';
+        text += 'Date :' + date_bill +'\n';
+        text += 'Receipt No :' + number_bill +'\n';
+        text += '----------------------------\n';
+        for (let item of this.headerItems) {
+            text += item.product__name+'\n';
+            text += item.quantity +'x '+ item.price +'\n';
+        }
+        text += '----------------------------\n';
+        text += 'Subtotal: \n';
+        text +=  subtotal +'\n';
+        text += '----------------------------\n';
+        text +=  '"' + note +'" \n';
+        //console.log(text);
+
+    	this.storage.get('id_printer').then(data => {
+            this.printProvider.print(text,data);
+        }); 
+    }
+
+}

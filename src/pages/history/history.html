@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Histori Penjualan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-tabs tabsHighlight="true" tabsPlacement="top">
+
+</ion-tabs>
+
+<ion-content class="outer-content">
+    <ion-searchbar
+        placeholder = "Receipt or Invoice Number"
+        [(ngModel)] = "searchInvoice"
+        (ionCancel)="onCancelInvoice($event)"
+        (ionInput)="onInputInvoice($event)"
+        (ionClear) = "clearSearchInvoice($event)">
+    </ion-searchbar>
+
+    <ion-list *ngIf="!isfiltered">
+	    <ion-list *ngFor="let key of salesDummies" >
+		    <ion-list-header>{{ key.tanggal | date :  "dd/MM/y" }}</ion-list-header>
+		    <ion-item-sliding *ngFor="let item of key.item" (tap)="select(item)">
+			    <ion-item>	    	
+			      	<ion-avatar item-start>
+			        	<ion-icon ios="ios-albums-outline" class="custom-icon" md="md-albums"></ion-icon>
+			      	</ion-avatar>
+			      	<h2>Rp. {{ item.amount | number }}</h2>
+			      	<p>{{ item.number }}</p>
+			      	<ion-note item-end></ion-note>
+			    </ion-item>
+		    </ion-item-sliding>	    
+		</ion-list>
+	</ion-list>
+
+	<ion-list *ngIf="isfiltered">
+		<ion-list *ngFor="let keys of filteredJson" >
+		    <ion-list-header>{{ keys.tanggal }}</ion-list-header>
+		    <ion-item-sliding *ngFor="let items of keys.item" (tap)="select(items)">
+			    <ion-item>	    	
+			      	<ion-avatar item-start>
+			        	<ion-icon ios="ios-albums-outline" class="custom-icon" md="md-albums"></ion-icon>
+			      	</ion-avatar>
+			      	<h2>Rp. {{ items.amount | number }}</h2>
+			      	<p>{{ items.number }}</p>
+			      	<ion-note item-end></ion-note>
+			    </ion-item>
+		    </ion-item-sliding>	    
+		</ion-list>
+	</ion-list>
+</ion-content>

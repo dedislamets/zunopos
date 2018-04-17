@@ -1,0 +1,120 @@
+webpackJsonp([2],{
+
+/***/ 291:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductOtherPageModule", function() { return ProductOtherPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__product_other__ = __webpack_require__(300);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ProductOtherPageModule = (function () {
+    function ProductOtherPageModule() {
+    }
+    ProductOtherPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__product_other__["a" /* ProductOtherPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__product_other__["a" /* ProductOtherPage */]),
+            ],
+        })
+    ], ProductOtherPageModule);
+    return ProductOtherPageModule;
+}());
+
+//# sourceMappingURL=product-other.module.js.map
+
+/***/ }),
+
+/***/ 300:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductOtherPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_share_share__ = __webpack_require__(201);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProductOtherPage = (function () {
+    function ProductOtherPage(navCtrl, navParams, alertCtrl, app, httpClient, shareProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.app = app;
+        this.httpClient = httpClient;
+        this.shareProvider = shareProvider;
+        this.productDummies = [{
+                name: 'MociMoci Bubble Gum',
+                price_sell: 12000
+            }];
+        this.products = this.productDummies;
+        this.sale = this.shareProvider.getSale();
+        if (typeof this.sale == 'undefined') {
+            this.sale = {
+                amount: 0
+            };
+        }
+    }
+    ProductOtherPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProductOtherPage');
+    };
+    ProductOtherPage.prototype.cancel = function () {
+        this.sale = {
+            amount: 0
+        };
+        this.shareProvider.setSale(this.sale);
+    };
+    ProductOtherPage.prototype.checkout = function () {
+        this.app.getRootNav().push('PaymentPage');
+    };
+    ProductOtherPage.prototype.select = function (product) {
+        if (typeof product.quantity == 'undefined') {
+            product.quantity = 0;
+        }
+        this.sale.amount += parseFloat(product.price_sell);
+        this.shareProvider.setSale(this.sale);
+    };
+    ProductOtherPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
+            selector: 'page-product-other',template:/*ion-inline-start:"D:\zunopos_1\src\pages\product-other\product-other.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>Lain-Lain</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-footer>\n    <div style="padding: 2px 4px;">\n        <ion-row>\n            <ion-col col-4>\n                <button ion-button block color="light" style="box-shadow: none !important; color: #666; font-size: 1.2em;" (tap)="cancel()">\n                    <div style="text-transform: capitalize;">Batal</div>\n                </button>\n            </ion-col>\n            \n            <ion-col col-8>\n                <button ion-button block strong color="zuno-button" style="font-size: 1.2em;" [disabled] = "sale.amount <= 0" (tap)="checkout()">\n                    <div style="text-transform: capitalize;">Bayar (Rp {{ sale.amount | number }})</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </div>\n</ion-footer>\n\n<ion-content>\n    <ion-searchbar\n        placeholder = "Cari"\n        [(ngModel)] = "search"\n        (ionCancel)="onCancel($event)"\n        (ionInput)="onInput($event)">\n    </ion-searchbar>\n\n    <ion-list>\n        <button ion-item *ngFor="let product of products" (tap)="select(product)">\n            <ion-thumbnail item-start>\n                <img src="http://placehold.it/80x80">\n            </ion-thumbnail>\n            <ion-row>\n                <ion-col style="white-space: normal;">\n                    {{ product.name }}<br /><br />\n                    Rp {{ product.price_sell | number }}\n                </ion-col>\n            </ion-row>\n        </button>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\zunopos_1\src\pages\product-other\product-other.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_share_share__["a" /* ShareProvider */]])
+    ], ProductOtherPage);
+    return ProductOtherPage;
+}());
+
+//# sourceMappingURL=product-other.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=2.js.map

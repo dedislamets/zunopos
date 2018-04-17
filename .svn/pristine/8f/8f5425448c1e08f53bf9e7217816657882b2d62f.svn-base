@@ -1,0 +1,48 @@
+.page-login {
+    background: #EFF8FE;
+
+    text-align:center;
+    overflow: hidden;
+}
+
+.login-logo {
+    margin-top: 100px;
+}
+
+.form-group {
+    background: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    &.item-input.input-has-focus {
+        &:last-child,
+        .item-inner {
+            border-bottom-color: map-get($colors, zuno-button);
+            -webkit-box-shadow: inset 0 -1px 0 0 map-get($colors, zuno-button);
+            box-shadow: inset 0 -1px 0 0 map-get($colors, zuno-button);
+
+            .control-label {
+                color: map-get($colors, zuno-button);
+            }
+        }
+    }
+
+    &.item-input-has-value {
+        &:last-child,
+        .item-inner {
+            border-bottom-color: #7ec593;
+            -webkit-box-shadow: inset 0 -1px 0 0 #7ec593;
+            box-shadow: inset 0 -1px 0 0 #7ec593;
+        }
+    }
+}
+
+.form-control {
+    color: map-get($colors, dark);
+}
+
+.btn-login {
+    margin-top: 30px;
+}

@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-title>Detil Rekap Kas</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-footer *ngIf="userShift.completed == false">
+    <div class="footer-wrapper">
+        <ion-row>
+            <ion-col col-6>
+                <button ion-button strong color="zuno" block (tap)="cashInOutForm()">Kas Masuk/Keluar</button>
+            </ion-col>
+            <ion-col col-6>
+                <button ion-button strong color="zuno-button" block (tap)="cashRegisterRecap()">Rekap Kas</button>
+            </ion-col>
+        </ion-row>
+    </div><!-- /.footer-wrapper -->
+</ion-footer>
+<ion-content>
+    <div class="cash-register-detail-header">
+        <h1 class="title">{{ userShift.user__name }}</h1>
+        <span class="sub-title">{{ userShift.sign_in_date_format }} {{ (userShift.completed) ? ' - ' + userShift.sign_out_date_format : '' }}</span>
+    </div><!-- /.cash-register-detail-header -->
+
+    <div class="transaction-list-container" *ngIf="transactions.length > 0">
+        <ion-list class="transactions">
+            <ion-item *ngFor="let transaction of transactions">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-4>
+                            <div class="list-label">Jumlah</div>
+                            <h3 class="list-value"><strong>{{ transaction.amount_display }}</strong></h3>
+                        </ion-col>
+                        <ion-col col-4>
+                            <div class="list-label">Tipe</div>
+                            <h3 class="list-value" *ngIf="transaction.type == 'in'">Kas Masuk</h3>
+                            <h3 class="list-value" *ngIf="transaction.type == 'out'">Kas Keluar</h3>
+                        </ion-col>
+                        <ion-col col-4>
+                            <div class="list-label">Keterangan</div>
+                            <h3 class="list-value">{{ transaction.description }}</h3>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </ion-list>
+    </div><!-- /.transaction-list -->
+
+    <div class="transaction-list no-data" *ngIf="transactions.length == 0">
+        <h3 class="title">Tidak Ada Data Kas Masuk / Keluar</h3>
+        <p class="sub-title">
+            Anda belum pernah memasukan data <br />
+            kas masuk/keluar
+        </p>
+        <ion-icon name="bookmarks"></ion-icon>
+    </div><!-- /.cash-register-no-data -->
+
+</ion-content>

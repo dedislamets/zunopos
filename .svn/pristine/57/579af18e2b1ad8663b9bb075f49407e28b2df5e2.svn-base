@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-title>Rekap Kas</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-footer>
+    <div class="footer-wrapper">
+        <button ion-button block color="zuno" (tap)="submitForm()">SIMPAN</button>
+    </div>
+</ion-footer>
+<ion-content padding>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+        <ion-list class="recap-form">
+            <ion-item>
+                <ion-label>Tunai</ion-label>
+                <ion-input class="align-right" placeholder="0" type="number" [(ngModel)]="input.amount_cash" (ngModelChange)="calculateAmount()" name="amount_cash" min="0" maxlength="10"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Kartu</ion-label>
+                <ion-input class="align-right" placeholder="0" type="number" [(ngModel)]="input.amount_card" (ngModelChange)="calculateAmount()" name="amount_card" min="0" maxlength="10"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <div class="total">
+            <ion-row>
+                <ion-col col-3>
+                    <h3>TOTAL</h3>
+                </ion-col>
+                <ion-col col-9 class="align-right"><h3>{{ amountTotal | currency: 'IDR' }}</h3></ion-col>
+            </ion-row>
+        </div><!-- /.total -->
+    </form>
+</ion-content>

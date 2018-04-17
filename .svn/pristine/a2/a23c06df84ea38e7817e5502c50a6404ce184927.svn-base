@@ -1,0 +1,26 @@
+page-cash-register-complete {
+    .footer-wrapper {
+        padding: 5px 10px;
+    }
+
+    .cash-register-complete {
+        .row {
+            margin-bottom: 10px;
+        }
+
+        .has-child,
+        .label {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-size: 12px;
+        }
+
+        .sub-label {
+            padding-left: 15px;
+        }
+    }
+
+
+}

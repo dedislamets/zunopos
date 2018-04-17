@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <ion-buttons start>
+	        <button ion-button menuToggle>
+	          <ion-icon name="menu"></ion-icon>
+	        </button>
+	    </ion-buttons>      
+	    <ion-title>Pembayaran</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-list>
+		<ion-item-group>
+		    <ion-item-divider color="light">Items</ion-item-divider>
+		    <ion-item *ngFor="let item of listItem">
+		    	<ion-col col-6>
+					- {{ item.name }}
+				</ion-col>
+				<ion-col col-2>
+					1x
+				</ion-col>
+				<ion-col col-4 item-end>
+					Rp {{ item.price | number }}
+				</ion-col>
+		    </ion-item>
+		    <ion-item>
+		    	<ion-col col-8 style="font-weight: bold;">
+					Subtotal
+				</ion-col>
+				<ion-col col-4 item-end style="font-weight: bold;">
+					Rp {{ amount | number }}
+				</ion-col>
+		    </ion-item>
+		</ion-item-group>
+	</ion-list>
+	<div padding style="padding-top: 0">
+	  <button ion-button block color="danger" (tap)="clearItem()">Clear Checkout</button>
+	</div>
+	<hr>
+
+	<ion-list>
+		<ion-item-group>
+		<ion-item-divider color="light">Invoice</ion-item-divider>
+			<ion-item class="item-padding" style="padding-top: 0">
+			    <ion-label fixed>Cash</ion-label>
+			    <ion-input type="text" placeholder="Rp {{ amount | number }}"></ion-input>
+			</ion-item>
+
+			<ion-item>
+			    <ion-label fixed>Method</ion-label>
+			    <ion-select [(ngModel)]="gaming">
+			      <ion-option value="nes">NES</ion-option>
+			      <ion-option value="n64">Nintendo64</ion-option>
+			      <ion-option value="ps">PlayStation</ion-option>
+			      <ion-option value="genesis">Sega Genesis</ion-option>
+			      <ion-option value="saturn">Sega Saturn</ion-option>
+			      <ion-option value="snes">SNES</ion-option>
+			    </ion-select>
+			</ion-item>
+
+			<ion-item>
+			    <ion-label fixed>Customer</ion-label>
+			    <ion-select [(ngModel)]="cust">
+			    	<div *ngFor="let itemCustomer of listCustomer">
+			        	<ion-option value="{{ itemCustomer.id }}">{{ itemCustomer.name }}</ion-option>		
+			        </div>	        
+			    </ion-select>
+			</ion-item>
+
+			<ion-item>
+			    <ion-label fixed>Note</ion-label>
+			    <ion-input type="text" placeholder="Optional Note"></ion-input>
+			</ion-item>
+		</ion-item-group>
+	
+	</ion-list>
+</ion-content>
+
+<ion-footer>
+    <div style="padding: 2px 4px;">
+        <ion-row>
+            <ion-col col-12>
+                <button ion-button block strong color="zuno-button" style="font-size: 1.2em;" (click)="payment()">
+                    <div style="text-transform: capitalize;">Charge</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-footer>

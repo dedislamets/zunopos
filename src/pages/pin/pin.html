@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-navbar color="zuno"></ion-navbar>
+</ion-header>
+
+<ion-footer>
+    <table>
+        <tr>
+            <td style="width: 33%;">
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(1)">
+                    <div style="text-transform: capitalize;">1</div>
+                </button>
+            </td>
+
+            <td style="width: 34%;">
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(2)">
+                    <div style="text-transform: capitalize;">2</div>
+                </button>
+            </td>
+
+            <td style="width: 33%;">
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(3)">
+                    <div style="text-transform: capitalize;">3</div>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(4)">
+                    <div style="text-transform: capitalize;">4</div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(5)">
+                    <div style="text-transform: capitalize;">5</div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(6)">
+                    <div style="text-transform: capitalize;">6</div>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(7)">
+                    <div style="text-transform: capitalize;">7</div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(8)">
+                    <div style="text-transform: capitalize;">8</div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(9)">
+                    <div style="text-transform: capitalize;">9</div>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button ion-button clear full large style="color: #666; height: 48px !important; margin: 0 !important;" (tap)="tapClear()">
+                    <div style="text-transform: capitalize;"><ion-icon name="close"></ion-icon></div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button full large outline style="background-color: #f4f4f4; border-color: #f4f4f4; color: #666; font-size: 1.2em; margin: 0 !important;" (tap)="tapNumber(0)">
+                    <div style="text-transform: capitalize;">0</div>
+                </button>
+            </td>
+
+            <td>
+                <button ion-button clear full large style="color: #666; height: 48px !important; margin: 0 !important;" (tap)="tapBackspace()">
+                    <div style="text-transform: capitalize;"><ion-icon name="backspace"></ion-icon></div>
+                </button>
+            </td>
+        </tr>
+    </table>
+</ion-footer>
+
+<ion-content>
+    <ion-grid no-padding class="pin">
+        <ion-row>
+            <ion-col text-center>
+                <img height="60" src="assets/imgs/zuno-logo.png" width="60" /><br />
+                <span style="color: #666; font-size: 1.6em; font-weight: bold; text-align: center;">ZUNOPOS</span><br /><br />
+                <p style="color: #666; font-size: 1.1em; text-align: center;">Enter PIN</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="color: #666; margin: 0.5em 0 1em; width: 100%">
+            <ion-col col-4>
+            </ion-col>
+
+            <ion-col col-1>
+                <div [class]="circle1" style="margin: 0 auto;"></div>
+            </ion-col>
+
+            <ion-col col-1 text-center>
+                <div [class]="circle2" style="margin: 0 auto;"></div>
+            </ion-col>
+
+            <ion-col col-1 text-center>
+                <div [class]="circle3" style="margin: 0 auto;"></div>
+            </ion-col>
+
+            <ion-col col-1 text-center>
+                <div [class]="circle4" style="margin: 0 auto;"></div>
+            </ion-col>
+
+            <ion-col col-4>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

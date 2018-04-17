@@ -1,0 +1,22 @@
+page-cash-register-complete {
+    .cash-register-complete {
+        .row {
+            margin-bottom: 10px;
+        }
+
+        .has-child,
+        .label {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-size: 12px;
+        }
+
+        .sub-label {
+            padding-left: 15px;
+        }
+    }
+
+
+}

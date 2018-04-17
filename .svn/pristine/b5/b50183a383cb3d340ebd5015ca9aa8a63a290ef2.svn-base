@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="zuno">
+           
+	    <ion-title>Zuno</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+	<ion-card text-center class="hide-card">
+	    <img src="http://placehold.it/300x200" class="custom-avatar"/>
+	    <h1 style="font-weight: bold;">Transaction Success</h1>	    
+	    <hr>
+	</ion-card>
+	<ion-list>
+        <ion-item>
+            <ion-input type="text" placeholder="email Receipt"></ion-input>
+            <button ion-button large clear item-end>Send</button>
+        </ion-item>
+        <ion-item>
+            <ion-input type="phone" placeholder="Your Phone"></ion-input>
+            <button ion-button large clear item-end>Send</button>
+        </ion-item>
+   </ion-list>
+   <div padding>
+	  <button ion-button block >Print Receipt</button>
+	  <button ion-button block color="danger" (tap)="backRoot()">No, Thanks</button>
+	</div>
+</ion-content>

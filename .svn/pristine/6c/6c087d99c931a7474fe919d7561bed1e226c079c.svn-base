@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="zuno">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Pesanan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-tabs tabsHighlight="true" tabsPlacement="top">
+  <ion-tab [root]="tab1Root" tabTitle="Semua"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Makanan" tabIcon="pizza"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Minuman" tabIcon="beer"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Lain-Lain" tabIcon="restaurant"></ion-tab>
+</ion-tabs>

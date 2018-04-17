@@ -1,0 +1,56 @@
+page-payment {
+  ion-input { 
+    border: 1px solid #f4f4f4;
+    border-radius : 4px;
+    margin: 10px;
+  }
+
+  ion-select {
+    border: 1px solid #f4f4f4;
+    border-radius : 4px;
+    margin: 10px;
+    width: 80%;
+    max-width: 80%;
+  }
+
+  .border-none {
+      border-bottom: none !important;
+  }
+
+
+  ion-label {
+    margin:0 !important;
+    color: #000 !important;
+  }
+
+  .input-wrapper {
+      padding-bottom: 0 !important;
+  }
+
+  .item-input ion-label {
+    color: #000 !important;
+  }
+
+  .button-customer {
+        width: 60%;
+        background-color: transparent;
+        color: #000;
+        height: 45px !important;
+        border: solid 1px #f4f4f4;
+        box-shadow: none;
+  }
+
+  item-text-left {
+float: left;
+}
+
+.mess-notif {
+text-align: right;
+color: #ffffff;
+background-color: #D85D4D;
+padding: 5px;
+border-radius: 3px 3px 3px 3px;
+line-height: 2;
+}
+
+}

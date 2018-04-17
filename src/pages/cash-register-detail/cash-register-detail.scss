@@ -1,0 +1,80 @@
+page-cash-register-detail {
+    .footer-wrapper {
+        padding: 2px 4px;
+    }
+
+    .transaction-list {
+        &.no-data {
+            text-align: center;
+
+            .title {
+                font-size: 16px;
+                margin-bottom: 0;
+                margin-top: 30px;
+            }
+
+            .sub-title {
+                color: grey;
+                font-size: 14px;
+            }
+
+            ion-icon {
+                font-size: 3em;
+                color: grey;
+            }
+        }
+    }
+
+    .transactions {
+        border-bottom: 1px solid #DEDEDE;
+
+        ion-item {
+            padding-left: 0;
+
+            .grid {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+        .label {
+            margin: 0;
+        }
+    }
+}
+
+.cash-in-out-page {
+    ion-backdrop {
+        opacity: 0.3
+    }
+
+    .cash-in-out-header {
+        .close-button {
+            float: left;
+        }
+
+        .form-title {
+            float: left;
+            font-size: 16px;
+            margin: 0;
+            margin-top: 12px;
+        }
+    }
+
+    .cash-in-out-body {
+        padding: 15px;
+
+        ion-item {
+            padding-left: 0;
+        }
+    }
+
+    .button-submit {
+        margin-top: 15px;
+    }
+}
+
+.spacer {
+    border-bottom: 1px solid #DEDEDE;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

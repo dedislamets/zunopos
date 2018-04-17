@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/pin-dialog@^4.5.3",
+  "_id": "@ionic-native/pin-dialog@4.5.3",
+  "_inBundle": false,
+  "_integrity": "sha512-rcBKxyZtHEGZ7stINryFdO3rEVjJDpOSOIIDQsdzubMXEAvVw6FaVkBELRqZHAzCqoLyDFOHHh2azfM5H99KTA==",
+  "_location": "/@ionic-native/pin-dialog",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@ionic-native/pin-dialog@^4.5.3",
+    "name": "@ionic-native/pin-dialog",
+    "escapedName": "@ionic-native%2fpin-dialog",
+    "scope": "@ionic-native",
+    "rawSpec": "^4.5.3",
+    "saveSpec": null,
+    "fetchSpec": "^4.5.3"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/pin-dialog/-/pin-dialog-4.5.3.tgz",
+  "_shasum": "220498bd13053804c0d3e08808246c03b18b0837",
+  "_spec": "@ionic-native/pin-dialog@^4.5.3",
+  "_where": "D:\\zunopos_1",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/pin-dialog",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.5.3"
+}

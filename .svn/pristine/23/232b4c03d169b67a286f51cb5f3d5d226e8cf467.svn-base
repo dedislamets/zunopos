@@ -1,0 +1,25 @@
+page-sale {
+
+}
+
+.custom-icon {
+  font-size: 40px;
+}
+
+p {
+	font-size: 9px;
+}
+
+ion-note {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-top: 14px;
+ }
+
+ .list-ios {
+    margin-bottom: 10px;
+}
+
+ion-list-header {
+	background-color: #e0dddd !important;
+}

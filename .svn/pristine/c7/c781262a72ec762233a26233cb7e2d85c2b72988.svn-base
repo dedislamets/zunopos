@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar color="zuno">
+        <ion-title>
+            Buat Kas
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="closeForm()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="cash-in-out-body">
+        <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+            <ion-list radio-group [(ngModel)]="input.type" name="type">
+                <ion-item class="no-padding">
+                    <ion-radio value="in" checked="true"></ion-radio>
+                    <ion-label> Kas Masuk</ion-label>
+                </ion-item><!-- /.form-group -->
+
+                <ion-item class="no-padding">
+                    <ion-radio value="out"></ion-radio>
+                    <ion-label>Kas Keluar</ion-label>
+                </ion-item><!-- /.form-group -->
+
+                <ion-item class="no-padding">
+                    <ion-input placeholder="Jumlah" type="number" [(ngModel)]="input.amount" name="amount"></ion-input>
+                </ion-item>
+                <ion-item class="no-padding">
+                    <ion-input placeholder="Keterangan" type="text"[(ngModel)]="input.description" name="description"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <button ion-button color="zuno" block class="button-submit">SIMPAN</button>
+        </form>
+    </div><!-- /.cash-in-out-content -->
+</ion-content>

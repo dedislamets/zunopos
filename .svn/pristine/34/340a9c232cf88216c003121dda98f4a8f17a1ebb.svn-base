@@ -1,0 +1,31 @@
+.page-user {
+	background: #EFF8FE;
+	background-size: cover;
+}
+
+.item-block {
+	background: none;
+}
+
+.button-user {
+	margin-bottom: 10px;
+}
+
+.logo-container {
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.avatar {
+	img {
+		border: 2px solid #CCCCCC;
+	}
+	min-width: 50px;
+	min-height: 50px;
+}
+
+.list-item {
+	padding-left: 0;
+}
+

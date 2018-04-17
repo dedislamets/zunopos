@@ -1,0 +1,127 @@
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { ShareProvider } from '../../providers/share/share';
+import { SaleItemPage } from '../../pages/sale-item/sale-item';
+
+@IonicPage()
+@Component({
+  selector: 'page-sale',
+  templateUrl: 'sale.html',
+})
+export class SalePage {	
+	salesDummies = [];
+	filteredJson = [];
+	salesFilter = [];
+	arrays = [];
+	private itemSale: any;
+	isfiltered: boolean ;
+
+  	constructor(public navCtrl: NavController, public navParams: NavParams,
+        private httpClient: HttpClient,
+        private shareProvider: ShareProvider,
+        private storage: Storage) {
+        	this.itemSale = this.shareProvider.getSaleItem();
+
+        	this.initializeItemsInvoice();
+  	}
+
+   	ionViewDidLoad() {
+        this.initializeItemsInvoice();        
+    }
+
+    initializeItemsInvoice() {
+    	var groupArray = require('group-array');
+    	var dateFormat = require('dateformat');
+    	var filtered = [];
+    	
+        this.storage.get('user_api').then(userApi => {
+            var param = {
+                page: 1,
+                start: 0,
+                limit: 25,
+                api_token: '4915736d-6124-4da1-86f6-23b64f3198fe'
+            };
+
+            this.httpClient.post('http://baksobomroxy.inventory.id/api/v1/sales', param).subscribe(data => {
+                this.arrays = groupArray(data['sales'], 'date');
+                for(var key in this.arrays) {
+                	filtered.push({
+				        tanggal: dateFormat(key, "dd/mm/yyyy"),
+				        item: this.arrays[key]
+				    });
+				}
+
+				this.salesDummies = filtered;
+				
+            });
+        });
+       
+        this.isfiltered = false;
+    }
+
+    onInputInvoice(ev) {
+        this.initializeItemsInvoice();
+        var val = ev.target.value;
+        var filtered = [];
+        var groupArray = require('group-array');
+	    var dateFormat = require('dateformat');
+ 
+        this.storage.get('user_api').then(userApi => {
+        	let filter = [];
+            var param;
+            if(val && val.trim() != '') {
+	        	this.isfiltered = true;
+	        	filter.push({
+	                field: 'number',
+	                operator: 'like',
+	                value: val,
+	                mode: 'and'
+	            });
+	            param = {
+	                page: 1,
+	                start: 0,
+	                limit: 25,
+	                api_token: '4915736d-6124-4da1-86f6-23b64f3198fe',
+	               	filter: JSON.stringify(filter)
+            	};
+	        }else {
+	        	param = {
+	                page: 1,
+	                start: 0,
+	                limit: 25,
+	                api_token: '4915736d-6124-4da1-86f6-23b64f3198fe',
+            	};
+	        }
+
+            this.httpClient.post('http://baksobomroxy.inventory.id/api/v1/sales', param).subscribe(data => {
+                this.salesDummies = groupArray(data['sales'], 'date');
+                for(var key in this.salesDummies) {
+                	filtered.push({
+				        tanggal: dateFormat(key, "dd/mm/yyyy"),
+				        item: this.salesDummies[key]
+				    });
+				}
+
+				this.filteredJson = filtered;
+				this.salesDummies = filtered;
+
+            });
+        });        
+    }
+
+    select(item) {
+    	console.log('tap');
+        //this.navCtrl.setRoot(SaleItemPage);
+    }
+
+    onCancelInvoice(ev) {
+        this.initializeItemsInvoice();
+    }
+
+    clearSearchInvoice(ev) {
+        this.initializeItemsInvoice();
+    }
+
+}

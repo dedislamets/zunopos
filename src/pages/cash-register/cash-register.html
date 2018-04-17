@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Kelola Kas</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ng-template ngFor let-shift [ngForOf]="userShifts">
+            <ion-item-divider color="light">{{ shift.dateName }}</ion-item-divider>
+
+            <button ion-item *ngFor="let userShift of shift.userShifts" (tap)="shiftDetail(userShift)">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                            <div class="shift-label">Kasir</div>
+                            <h3 class="shift-value"><strong>{{ userShift.user__name }}</strong></h3>
+                        </ion-col>
+                        <ion-col col-3>
+                            <div class="shift-label">Status</div>
+                            <h3 class="shift-value">{{userShift.completed ? 'Tertutup' : 'Terbuka'}}</h3>
+                        </ion-col>
+                        <ion-col col-2>
+                            <div class="shift-label">Jam</div>
+                            <h3 class="shift-value">{{ userShift.sign_out_date_time }}</h3>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon class="button-icon" name="arrow-forward" showWhen="android,windows"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </button>
+        </ng-template>
+    </ion-list>
+</ion-content>

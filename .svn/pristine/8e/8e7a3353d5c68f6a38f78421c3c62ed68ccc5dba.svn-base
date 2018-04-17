@@ -1,0 +1,14 @@
+page-success {
+
+}
+
+.hide-card {
+  -webkit-box-shadow: none!important;
+}
+
+.custom-avatar {
+  height: 30vw;
+  font-size: 60pt;
+  color: green;
+}
+

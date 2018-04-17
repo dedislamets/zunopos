@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Pengaturan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <button ion-button color="zuno-button" (tap)="print('ZUNO')">
+        Print
+    </button>
+</ion-content>

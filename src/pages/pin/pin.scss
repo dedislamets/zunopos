@@ -1,0 +1,34 @@
+page-pin {
+    table {
+        width: 100%;
+    }
+
+    table td {
+        border: 1px solid transparent;
+    }
+
+    .pin {
+        background-color: #f8eddf;
+        justify-content: center !important;
+        height: 100%;
+    }
+
+    .scroll-content {
+        overflow: hidden;
+    }
+    
+    .circle {
+        border: 1px solid #ffa530;
+        border-radius: 50%;
+        height: 1.1em;
+        width: 1.1em;
+    }
+
+    .circle-solid {
+        background-color: #ffa530 !important;
+        /*box-shadow: 0 0 3em 0 #3d8fc9;*/
+        border-radius: 50%;
+        height: 1.1em;
+        width: 1.1em;
+    }
+}

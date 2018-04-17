@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="zuno">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Pengaturan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+    	<button ion-button block color="zuno-button" (tap)="print('ZUNO')">
+        	Tes Print
+    	</button>
+	  	<button ion-button block color="zuno-button" (click)="startScanning()">scan</button>
+	  	<ion-list-header>
+	    	Paired Devices
+	  	</ion-list-header>
+	  	<ion-item *ngFor="let device of pairedDevices;let i = index">
+		    <ion-label text-left (click)="selectListDev(i)">{{device.name}}</ion-label>
+	  	</ion-item>
+	  	<button ion-button block color="light" (click)="disconnect()">Disconnect</button>
+	  	<ion-list-header>
+	    	availlable Devices
+	  	</ion-list-header>
+	  	<ion-item *ngFor='let device of unpairedDevices'>
+		    <span (click)="selectDevice(device.address)">
+		      {{device.name}}
+		    </span>
+	  	</ion-item>
+	  	<ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+	</ion-list>
+</ion-content>

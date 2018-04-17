@@ -1,0 +1,102 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import * as _ from 'lodash';
+
+/**
+ * Generated class for the CashRegisterPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+@IonicPage()
+@Component({
+  selector: 'page-cash-register',
+  templateUrl: 'cash-register.html',
+})
+export class CashRegisterPage {
+    sales = [];
+    salesAmount = [];
+
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        private httpClient: HttpClient,
+        private storage: Storage
+    ) {
+    }
+
+    ionViewDidLoad() {
+          console.log('ionViewDidLoad CashRegisterPage');
+          this.getSales();
+    }
+
+    getSales() {
+        this.storage.get('user').then(user => {
+            var filters = [];
+
+            filters.push(/*{
+                field: 'user_shift_id',
+                operator: 'eq',
+                value: '0',
+                mode: 'and'
+            }, */{
+//                field: 'created_by_id',
+//                operator: 'eq',
+//                value: user['id'],
+//                mode: 'and'
+//            }, {
+                field: 'paid',
+                operator: 'eq',
+                value: 1,
+                mode: 'and'
+            });
+
+            this.storage.get('user_api').then(userApi => {
+                var apiUrl = userApi.apiUrl;
+
+                var param = {
+                    select: 'id,payment_method_id,amount,payment_method__name,paid',
+                    api_token: user['api_token'],
+                    filter: JSON.stringify(filters)
+                };
+
+                this.httpClient.post('http://'+apiUrl+'/api/v1/sales', param).subscribe(data => {
+                    if (data['sales'].length > 0) {
+                        this.groupSales(data['sales']);
+                    }
+                });
+            });
+        });
+    }
+
+    groupSales (sales) {
+        let salesGroup = [];
+        let salesAmount = [];
+
+        _.map(sales, sale => {
+            sale.amount = parseFloat(sale.amount);
+            return sale;
+        });
+
+        salesGroup = _.groupBy(sales, 'payment_method__name');
+
+        let paymentMethods = Object.keys(salesGroup);
+
+        for (let paymentMethod of paymentMethods) {
+            let amount = _.sumBy(salesGroup[paymentMethod], 'amount');
+
+            salesAmount.push({
+                paymentMethodName: paymentMethod,
+                amount: amount,
+                amountDisplay: new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount),
+                count: salesGroup[paymentMethod].length
+            });
+        }
+
+        this.salesAmount = salesAmount;
+    }
+}

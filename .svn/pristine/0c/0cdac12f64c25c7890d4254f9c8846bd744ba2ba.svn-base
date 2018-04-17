@@ -1,0 +1,43 @@
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicStorageModule } from '@ionic/storage';
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { AuthProvider } from '../providers/auth/auth';
+import { PrintProvider } from '../providers/print/print';
+import { ShareProvider } from '../providers/share/share';
+
+@NgModule({
+    declarations: [
+        MyApp,
+        HomePage,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage,
+
+    ],
+    providers: [
+        SplashScreen,
+        StatusBar,
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        AuthProvider,
+        BluetoothSerial,
+        PrintProvider,
+        ShareProvider
+    ]
+})
+export class AppModule {}

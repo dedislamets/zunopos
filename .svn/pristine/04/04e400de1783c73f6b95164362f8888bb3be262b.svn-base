@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Lain-Lain</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-footer>
+    <div style="padding: 2px 4px;">
+        <ion-row>
+            <ion-col col-4>
+                <button ion-button block color="light" style="box-shadow: none !important; color: #666; font-size: 1.2em;" (tap)="cancel()">
+                    <div style="text-transform: capitalize;">Batal</div>
+                </button>
+            </ion-col>
+            
+            <ion-col col-8>
+                <button ion-button block strong color="zuno-button" style="font-size: 1.2em;" [disabled] = "sale.amount <= 0" (tap)="checkout()">
+                    <div style="text-transform: capitalize;">Bayar (Rp {{ sale.amount | number }})</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-footer>
+
+<ion-content>
+    <ion-searchbar
+        placeholder = "Cari"
+        [(ngModel)] = "search"
+        (ionCancel)="onCancel($event)"
+        (ionClear) = "clearSearch($event)"
+        (ionInput)="onInput($event)">
+    </ion-searchbar>
+
+    <ion-list *ngIf="!isfiltered">
+        <button ion-item *ngFor="let product of productDummies" (tap)="select(product)">
+            <ion-thumbnail item-start>
+                <img src="http://placehold.it/80x80">
+            </ion-thumbnail>
+            <ion-row>
+                <ion-col style="white-space: normal;">
+                    {{ product.name }}<br /><br />
+                    Rp {{ product.product_pricing__price | number }}
+                </ion-col>
+            </ion-row>
+        </button>
+    </ion-list> 
+    <ion-list *ngIf="isfiltered">
+        <button ion-item *ngFor="let product of filteredJson" (tap)="select(product)">
+            <ion-thumbnail item-start>
+                <img src="http://placehold.it/80x80">
+            </ion-thumbnail>
+            <ion-row>
+                <ion-col style="white-space: normal;">
+                    {{ product.name }}<br /><br />
+                    Rp {{ product.product_pricing__price | number }}
+                </ion-col>
+            </ion-row>
+        </button>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,201 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ShareProvider } from '../../providers/share/share';
+import { SuccessPage } from '../../pages/success/success';
+import { Storage } from '@ionic/storage';
+import { ToastController } from 'ionic-angular';
+import * as moment from 'moment';
+
+@IonicPage()
+@Component({
+  selector: 'page-payment',
+  templateUrl: 'payment.html',
+})
+export class PaymentPage {
+    private listItem: any;
+    private listCustomer: any;
+    private listMethod: any;
+    private cust: string = '14';
+    private method: string = '1';
+    private note: string = '';
+    private amount: any;
+    private customer_name: any;
+
+
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private shareProvider: ShareProvider,
+        private httpClient: HttpClient,
+        private storage: Storage,
+        public toastCtrl: ToastController) {
+
+        this.customer_name = 'Pilih Pelanggan';
+
+
+        this.amount = this.shareProvider.getSale().amount;
+        this.storage.get('sale').then(sale => {
+            this.listItem = sale;
+        });
+
+        this.storage.get('user_api').then(userData => {
+            let filter = [];
+
+            filter.push({
+                field: 'type_customer',
+                property: 'type_customer',
+                operator: 'eq',
+                value: 'Company',
+                mode: 'and'
+            });
+
+            let param = {
+                api_token: userData.apiToken,
+                select: 'id,name',
+                filter: JSON.stringify(filter)
+            };
+
+            this.httpClient.post('http://'+userData.apiUrl+'/api/v1/customers', param).subscribe(
+            getData => {
+                this.listCustomer = getData['customers'];
+            }, err => {
+                console.log(err);
+            });
+
+            filter = [];
+            let param_method = {
+                api_token: userData.apiToken,
+                select: 'id,name',
+            };
+
+            this.httpClient.post('http://'+userData.apiUrl+'/api/v1/payment_methods', param_method).subscribe(
+            getData => {
+                this.listMethod = getData['paymentMethods'];
+            }, err => {
+                console.log(err);
+            });
+        });
+
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad PaymentPage');
+    }
+
+    onChangeMethod(){
+        console.log(this.method);
+    }
+
+    onChangeCustomer(){
+        console.log(this.cust);
+    }
+
+    payment() {
+        let sale_item = [];
+
+        this.amount = this.shareProvider.getSale().amount;
+
+        if(this.amount<=0){
+            let toast = this.toastCtrl.create({
+                  message: 'Items tidak boleh kosong',
+                  duration: 3000
+                });
+                toast.present();
+            return false;
+        }
+
+        this.storage.get('sale').then(sale => {
+            for (let item of sale) {
+                sale_item.push({
+                    id:0,
+                    product_id: item.id,
+                    name: item.name,
+                    quantity: 1,
+                    unit_name:"PCS",
+                    unit_conversion:1,
+                    discount:"",
+                    price: item.price,
+                    price_gross: item.price,
+                    price_discount:0,
+                    price_subtotal: item.price,
+                    amount: item.price,
+                    amount_gross: item.price,
+                    amount_discount:0,
+                    amount_subtotal: item.price,
+                    sort:0
+                });
+            }
+
+            let today = moment().format('YYYY-MM-DD');
+            this.storage.get('user_api').then(userApi => {
+                let param = {
+                    api_token: userApi.apiToken,
+                    ppn: 0,
+                    amount_gross: this.amount,
+                    number: '',
+                    date: today,
+                    customer_id: this.cust,
+                    payment_term_id: 1 ,
+                    payment_method_id:this.method,
+                    due_days: 0,
+                    due_date: today,
+                    location_id: 1,
+                    nofa_number: '',
+                    salesperson_id: userApi['userId'],
+                    date_begin: '',
+                    date_end: '',
+                    description: 'From Zunopos',
+                    note: this.note,
+                    amount_subtotal: this.amount,
+                    discount: '',
+                    amount_discount: 0,
+                    amount_rounding: 0,
+                    amount_taxable: this.amount,
+                    ppn_percentage: 0,
+                    ppn_amount: 0,
+                    amount: this.amount,
+                    sale_items: sale_item
+                };
+                this.httpClient.post('http://'+userApi.apiUrl+'/api/v1/sale', param).subscribe(data => {
+                    if(data['success']) {
+                        this.storage.set('inv', data['sale'].id);
+                        this.navCtrl.setRoot(SuccessPage);
+                        this.clearItem();
+                    }else{
+                        let toast = this.toastCtrl.create({
+                          message: data['message'],
+                          duration: 3000
+                        });
+                        toast.present();
+                    }
+
+                });
+            });
+        });
+    }
+
+    clearItem() {
+        this.storage.remove('sale');
+        this.shareProvider.setSale({amount: 0});
+        this.amount = 0;
+        this.listItem = null;
+    }
+
+    select(item) {
+        this.navCtrl.push('CustomerPage', {
+          id: 1,
+          callback: this.myCallbackFunction,
+          customer_name: this
+        })
+    }
+
+     myCallbackFunction = function(_params) {
+        return new Promise((resolve, reject) => {
+            console.log(this.cust);
+            this.customer_name = _params;
+            resolve();
+        });
+     }
+
+}
